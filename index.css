@@ -1,0 +1,28 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+#heading {
+  font-size: 25px;
+  color: white;
+  background-color: black;
+  text-align: center;
+  padding: 15px;
+}
+.menu_items {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+}
+.menu_items li a {
+  text-decoration: none;
+  color: white;
+}
+.menu_items li {
+  list-style: none;
+  display: inline;
+  padding: 20px;
+}
+.menu_items {
+  background-color: rgb(35, 33, 33);
+}
