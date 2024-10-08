@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/charts.css/dist/charts.min.css"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <title>Lab 5</title>
+  </head>
+  <body>
+    <!-- for header -->
+    <header class="head">
+      <div class="profile_info">
+        <i class="fa-solid fa-circle-info"></i>
+        <i class="fa-regular fa-bell"></i>
+        <img src="./images/profile.png" alt="error loading" />
+      </div>
+    </header>
+    <!-- for navigation -->
+    <nav class="navigation_links">
+      <ul class="links">
+        <div class="left_links">
+          <li><a href="#Home">Home</a></li>
+          <li><a href="#Audience">Audience</a></li>
+          <li><a href="#Behaviour">Behaviour</a></li>
+          <li><a href="#Conversions">Conversions</a></li>
+        </div>
+        <div class="right_links">
+          <li><a href="#Customize">Customize</a></li>
+        </div>
+      </ul>
+    </nav>
+    <!-- main section -->
+    <main>
+      <div class="wrapper">
+        <div class="main-container">
+          <div class="left-content">
+            <div class="row-1">
+              <div class="box box-1">
+                <div>
+                  <p>Active Users</p>
+                  <h1>72</h1>
+                </div>
+                <p class="uppercase">View Refferals</p>
+              </div>
+              <div class="box box-2">
+                <!--  -->
+                <div id="column-example-3">
+                  <table
+                    class="charts-css column multiple hide-data data-spacing-3"
+                  >
+                    <caption>
+                      Column Example #3
+                    </caption>
+                    <tbody>
+                      <tr>
+                        <td style="--size: 0.2">
+                          <span class="data"> $ 20K </span>
+                        </td>
+                        <td style="--size: 0.4">
+                          <span class="data"> $ 40K </span>
+                        </td>
+                        <td style="--size: 0.6">
+                          <span class="data"> $ 600K </span>
+                        </td>
+                        <td style="--size: 0.8">
+                          <span class="data"> $ 80K </span>
+                        </td>
+                        <td style="--size: 1">
+                          <span class="data"> $ 100K </span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="--size: 0.2">
+                          <span class="data"> $ 20K </span>
+                        </td>
+                        <td style="--size: 0.4">
+                          <span class="data"> $ 40K </span>
+                        </td>
+                        <td style="--size: 0.6">
+                          <span class="data"> $ 60K </span>
+                        </td>
+                        <td style="--size: 0.8">
+                          <span class="data"> $ 80K </span>
+                        </td>
+                        <td style="--size: 1">
+                          <span class="data"> $ 100K </span>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!--  -->
+              </div>
+            </div>
+            <div class="row-2">
+              <div class="box box-3">
+                <div class="row-content">
+                  <p>Users</p>
+                  <p class="green">
+                    <i class="fas fa-arrow-up"></i><span>268%</span>
+                  </p>
+                </div>
+                <div class="number">
+                  <p>15K</p>
+                </div>
+              </div>
+              <div class="box box-4">
+                <div class="row-content">
+                  <p>Sessions</p>
+                  <p class="green">
+                    <i class="fas fa-arrow-up"></i><span>268%</span>
+                  </p>
+                </div>
+                <div class="number">
+                  <p>17K</p>
+                </div>
+              </div>
+              <div class="box box-5">
+                <div class="row-content">
+                  <p>Bounce Rate</p>
+                  <p class="red">
+                    <i class="fas fa-arrow-up"></i><span>19.6%</span>
+                  </p>
+                </div>
+                <div class="number">
+                  <p>62.57%</p>
+                </div>
+              </div>
+              <div class="box box-6">
+                <div class="row-content">
+                  <p>Session Duration</p>
+                  <p class="red">
+                    <i class="fas fa-arrow-down"></i><span>29.7%</span>
+                  </p>
+                </div>
+                <div class="number">
+                  <p>1m 37s</p>
+                </div>
+              </div>
+            </div>
+            <div class="row-3">
+              <div class="box box-7">
+                <div class="alerts-left">
+                  <i class="fas fa-bell"></i>
+                  <div>
+                    <p class="alerts-desc">No alerts set</p>
+                    <p>Get notified when your data drasticaly change</p>
+                  </div>
+                </div>
+                <button>Set alert</button>
+              </div>
+            </div>
+            <div class="row-4">
+              <div class="box box-8">
+                <p>Devices</p>
+                <div class="months">
+                  <p class="month">May</p>
+                  <p>June</p>
+                  <p>July</p>
+                  <p>August</p>
+                </div>
+                <div class="devices">
+                  <div class="device">
+                    <p>Desktop | 52%</p>
+                    <div class="fifty-two"></div>
+                  </div>
+                  <div class="device">
+                    <p>Tablet | 15%</p>
+                    <div class="fifteen"></div>
+                  </div>
+                  <div class="device">
+                    <p>Mobile | 36%</p>
+                    <div class="thirty-six"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="box box-9">
+                <div class="box-header9">
+                  <h3>Devices</h3>
+                  <div class="options9">⋮</div>
+                </div>
+                <div class="box-item9">
+                  <span class="label">Direct</span>
+                  <span class="value">24</span>
+                </div>
+                <div class="box-item9 highlight9">
+                  <span class="label">Organic</span>
+                  <span class="value">14</span>
+                </div>
+                <div class="box-item9">
+                  <span class="label">Social</span>
+                  <span class="value">5</span>
+                </div>
+                <div class="box-item9">
+                  <span class="label">Referral</span>
+                  <span class="value">5</span>
+                </div>
+                <div class="box-item9">
+                  <span class="label">Social</span>
+                  <span class="value">2</span>
+                </div>
+              </div>
+
+              <!--  -->
+            </div>
+          </div>
+
+          <div class="right-content">
+            <div class="pages-content">
+              <table>
+                <thead>
+                  <tr>
+                    <td>Top pages</td>
+                    <td style="text-align: right">Visits</td>
+                  </tr>
+                </thead>
+              </table>
+              <table class="body-table">
+                <tbody style="margin-top: 10px">
+                  <tr>
+                    <td>/</td>
+                    <td style="text-align: right" class="noVisits">23, 956</td>
+                  </tr>
+                  <tr>
+                    <td>/about</td>
+                    <td style="text-align: right" class="noVisits">477</td>
+                  </tr>
+                  <tr>
+                    <td>/lisence</td>
+                    <td style="text-align: right" class="noVisits">477</td>
+                  </tr>
+                  <tr class="selected">
+                    <td
+                      style="
+                        border-top-left-radius: 10px;
+                        border-bottom-left-radius: 10px;
+                      "
+                    >
+                      /post/sketch-help-ce...links-search-day-1120
+                    </td>
+                    <td
+                      style="
+                        text-align: right;
+                        border-top-right-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                      "
+                      class="noVisits"
+                    >
+                      458
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>/post/sketch-help-ce...cards-newcard-day-1120</td>
+                    <td style="text-align: right" class="noVisits">447</td>
+                  </tr>
+                  <tr>
+                    <td>/post/sketch-help-ce...pricing-search-day-1120</td>
+                    <td style="text-align: right" class="noVisits">785</td>
+                  </tr>
+                  <tr>
+                    <td>/post/sketch-help-ce...-stats-day-1120</td>
+                    <td style="text-align: right" class="noVisits">962</td>
+                  </tr>
+                  <tr>
+                    <td>/post/sketch-help-ce...messages-search-day-1120</td>
+                    <td style="text-align: right" class="noVisits">558</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="stats-content">
+              <div class="row-stat">
+                <p>More stats</p>
+                <p
+                  style="
+                    background-color: rgba(3, 3, 100, 0.851);
+                    padding: 3px 10px;
+                    border-radius: 5px;
+                  "
+                >
+                  >
+                </p>
+              </div>
+              <div class="column-stat">
+                <p>More stats</p>
+                <p style="font-size: 2rem">42K</p>
+              </div>
+              <div class="column-stat">
+                <p>More stats</p>
+                <p style="font-size: 2rem">47.45%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
