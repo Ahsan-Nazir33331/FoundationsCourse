@@ -1,0 +1,233 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  color: #333;
+
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial;
+}
+/* header */
+.header_one {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+}
+.flag_contact img {
+  width: 8%;
+  height: 90%;
+}
+.flag_contact {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.email_contact {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* border: 2px solid red; */
+  width: 19%;
+}
+.fa-regular {
+  font-size: 150%;
+}
+/* Header two */
+.header_second {
+  background-color: rgb(224, 164, 53);
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.header_second h1,
+p {
+  color: white;
+}
+
+/* for navbar */
+.navbar {
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+}
+.navbar ul {
+  display: flex;
+  justify-content: center;
+  /* border: 2px solid red; */
+}
+.navbar ul li {
+  list-style: none;
+  margin: 0px 20px;
+}
+.navbar ul li a {
+  text-decoration: none;
+  color: black;
+  font-size: 20px;
+  color: gray;
+}
+/*  */
+.hotel-listing {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.hotel-listing h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Hotel Cards */
+.hotels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.hotel-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: calc(33.33% - 20px);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.hotel-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.hotel-card .details {
+  padding: 15px;
+}
+
+.hotel-card h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.hotel-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+
+.hotel-card .price {
+  font-size: 16px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+/* Explore More Button */
+.explore-btn {
+  display: block;
+  width: 200px;
+  margin: 30px auto 0;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.explore-btn:hover {
+  background-color: #0056b3;
+}
+/* footer */
+footer {
+  background-color: #222;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  padding: 40px 20px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  flex: 1 1 250px;
+  text-align: center;
+}
+
+.footer-brand img {
+  max-width: 120px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+}
+
+.footer-links,
+.footer-social,
+.footer-subscribe {
+  flex: 1 1 200px;
+  margin: 20px 0;
+}
+
+.footer-links h4,
+.footer-social h4,
+.footer-subscribe h4 {
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.footer-links a:hover {
+  color: #f0a500;
+}
+
+.footer-subscribe form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.footer-subscribe input {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+}
+
+.footer-subscribe button {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #f0a500;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer-subscribe button:hover {
+  background-color: #d98b00;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 12px;
+  border-top: 1px solid #444;
+  padding-top: 10px;
+}
+.footer-brand p {
+  color: white;
+}
