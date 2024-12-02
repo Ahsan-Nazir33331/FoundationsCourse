@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Zones</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.marquee/jquery.marquee.min.js"></script>
+    <link rel="stylesheet" href="./zone.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header_one">
+      <div class="email_contact">
+        <i class="fa-regular fa-envelope"></i>
+        <h3>ahsan.nazir0202@gmail.com</h3>
+      </div>
+      <div class="flag_contact">
+        <img src="./images/icon.png" alt="error loading" />
+        <h3>+372 55543624</h3>
+      </div>
+    </header>
+    <!-- Second head -->
+    <header class="header_second">
+      <h1>Family Adventure Park</h1>
+    </header>
+    <!-- navbar -->
+    <nav class="navbar">
+      <i class="fas fa-bars" id="hamburger"></i>
+      <div class="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="zone.html">Zone</a>
+        <a href="tickets.html">Tickets</a>
+        <a href="accomodation.html">Accomodation</a>
+        <a href="contact.html">Contact us</a>
+        <a href="#" id="exitMenu">❌</a>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        |
+        <li><a href="about.html">About us</a></li>
+        |
+        <li><a href="zone.html">Zones</a></li>
+        |
+        <li><a href="tickets.html">Tickets</a></li>
+        |
+        <li><a href="accomodation.html">Accomodation</a></li>
+        |
+        <li><a href="contact.html">Contact us</a></li>
+      </ul>
+    </nav>
+    <!-- Zones Section -->
+    <div class="zone-listing">
+      <h1>Explore Our Exciting Zones</h1>
+      <div class="loading" style="display: none">Loading...</div>
+      <div class="zones"></div>
+      <div class="pagination"></div>
+    </div>
+    <!-- footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="./images/logo.png" alt="Family Adventure Park Logo" />
+          <p>Your gateway to unforgettable family adventures!</p>
+        </div>
+        <div class="footer-subscribe">
+          <h4>Stay Updated</h4>
+          <form>
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2024 Family Adventure Park. All rights reserved.
+      </div>
+    </footer>
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.querySelector(".mobileMenu");
+
+      hamburger.addEventListener("click", function () {
+        mobileMenu.style.display = "flex";
+      });
+
+      const exitMenu = document.getElementById("exitMenu");
+      exitMenu.addEventListener("click", function () {
+        mobileMenu.style.display = "none";
+      });
+
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "7d9e6fdc39msh0f8966da609d6adp1a76ffjsna366989208fc", // Replace with your RapidAPI key
+          "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+        },
+      };
+
+      let currentPage = 1;
+      const recordsPerPage = 6;
+      let zonesData = [];
+
+      // Fetch data from the API
+      function fetchData() {
+        const zonesContainer = document.querySelector(".zones");
+        const loadingIndicator = document.querySelector(".loading");
+
+        loadingIndicator.style.display = "block";
+        zonesContainer.innerHTML = "";
+
+        fetch(
+          "https://travel-advisor.p.rapidapi.com/attractions/list?location_id=297704&currency=USD&lang=en_US&lunit=km&limit=48",
+          options
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            zonesData = data.data.filter((zone) => zone.name && zone.photo);
+            renderPage();
+          })
+          .catch((error) => console.error("Error fetching data:", error))
+          .finally(() => {
+            loadingIndicator.style.display = "none";
+          });
+      }
+
+      function renderPage() {
+        const zonesContainer = document.querySelector(".zones");
+        zonesContainer.innerHTML = "";
+
+        const startIndex = (currentPage - 1) * recordsPerPage;
+        const endIndex = startIndex + recordsPerPage;
+
+        const currentZones = zonesData.slice(startIndex, endIndex);
+
+        currentZones.forEach((zone) => {
+          const card = document.createElement("div");
+          card.classList.add("zone-card");
+
+          const img = document.createElement("img");
+          img.src = zone.photo.images.medium.url;
+          img.alt = zone.name;
+
+          const details = document.createElement("div");
+          details.classList.add("details");
+
+          const title = document.createElement("h3");
+          title.textContent = zone.name;
+
+          const button = document.createElement("button");
+          button.classList.add("explore-btn");
+          button.textContent = "Explore";
+          button.onclick = () => window.open(zone.web_url, "_blank");
+          details.appendChild(title);
+          details.appendChild(button);
+          card.appendChild(img);
+          card.appendChild(details);
+
+          zonesContainer.appendChild(card);
+        });
+
+        renderPagination();
+      }
+      function renderPagination() {
+        const paginationContainer = document.querySelector(".pagination");
+        paginationContainer.innerHTML = "";
+
+        const totalPages = Math.ceil(zonesData.length / recordsPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.textContent = i;
+          button.classList.add("page-btn");
+          if (i === currentPage) button.classList.add("active");
+
+          button.onclick = () => {
+            currentPage = i;
+            renderPage();
+          };
+
+          paginationContainer.appendChild(button);
+        }
+      }
+      fetchData();
+    </script>
+  </body>
+</html>

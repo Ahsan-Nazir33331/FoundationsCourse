@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.marquee/jquery.marquee.min.js"></script>
+    <title>Family Adventure Park</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header_one">
+      <div class="email_contact">
+        <i class="fa-regular fa-envelope"></i>
+        <h3>ahsan.nazir0202@gmail.com</h3>
+      </div>
+      <div class="flag_contact">
+        <img src="./images/icon.png" alt="error loading" />
+        <h3>+372 55543624</h3>
+      </div>
+    </header>
+    <!-- Second head -->
+    <header class="header_second">
+      <h1>Family Adventure Park</h1>
+      <p>A journey for all ages</p>
+      <div class="header_search">
+        <input
+          type="text"
+          name="searchBar"
+          id="searchBar"
+          placeholder="Search here"
+        />
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </div>
+    </header>
+    <!-- navbar -->
+    <nav class="navbar">
+      <i class="fas fa-bars" id="hamburger"></i>
+      <div class="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="zone.html">Zone</a>
+        <a href="tickets.html">Tickets</a>
+        <a href="accomodation.html">Accomodation</a>
+        <a href="contact.html">Contact us</a>
+        <a href="#" id="exitMenu">❌</a>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        |
+        <li><a href="about.html">About us</a></li>
+        |
+        <li><a href="zone.html">Zones</a></li>
+        |
+        <li><a href="tickets.html">Tickets</a></li>
+        |
+        <li><a href="accomodation.html">Accomodation</a></li>
+        |
+        <li><a href="contact.html">Contact us</a></li>
+      </ul>
+    </nav>
+
+    <!-- for hero section with slide show-->
+    <section class="section_first">
+      <div class="slider">
+        <!-- Slide 1 -->
+        <div class="myslide fade">
+          <div class="txt">
+            <h1>Jüriöö Park</h1>
+            <p>Keep close to Nature’s heart</p>
+          </div>
+          <img
+            class="slider_img"
+            src="./images/park1.jpg"
+            style="width: 100%"
+          />
+        </div>
+        <!-- Slide 2 -->
+        <div class="myslide fade">
+          <div class="txt">
+            <h1>Glehn Park</h1>
+            <p>Joy comes from places you least expect it</p>
+          </div>
+          <img
+            class="slider_img"
+            src="./images/park2.jpg"
+            style="width: 100%"
+          />
+        </div>
+        <!-- Slide 3 -->
+        <div class="myslide fade">
+          <div class="txt">
+            <h1>Kadriorg Park</h1>
+            <p>I like to take walks in the park by myself</p>
+          </div>
+          <img
+            class="slider_img"
+            src="./images/park3.jpg"
+            style="width: 100%"
+          />
+        </div>
+        <!-- Pagination -->
+        <div class="dotsbox" style="text-align: center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+      </div>
+      <div class="btns">
+        <button class="btn" id="btn1">Explore adventures</button>
+        <a
+          class="btn"
+          id="btn2"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+          "
+          href="tickets.html"
+          >Book your family trip</a
+        >
+        <a
+          class="btn"
+          id="btn3"
+          style="
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+          "
+          href="zone.html"
+          >Special Offers</a
+        >
+      </div>
+    </section>
+    <section class="section_second"></section>
+    <div class="pagination"></div>
+
+    <!-- footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="./images/logo.png" alt="Family Adventure Park Logo" />
+          <p>Your gateway to unforgettable family adventures!</p>
+        </div>
+        <div class="footer-subscribe">
+          <h4>Stay Updated</h4>
+          <form>
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2024 Family Adventure Park. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="./index.js"></script>
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.querySelector(".mobileMenu");
+
+      hamburger.addEventListener("click", function () {
+        mobileMenu.style.display = "flex";
+      });
+
+      const exitMenu = document.getElementById("exitMenu");
+      exitMenu.addEventListener("click", function () {
+        mobileMenu.style.display = "none";
+      });
+
+      const opts = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key":
+            "7d9e6fdc39msh0f8966da609d6adp1a76ffjsna366989208fc",
+          "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+        },
+      };
+
+      let cPage = 1;
+      const recPerPage = 4;
+      let servicesData = [];
+      function fetchServices() {
+        const servicesSection = document.querySelector(".section_second");
+        servicesSection.innerHTML = `<h1 class="main_service_heading">Our Services</h1><p class="loading">Loading services...</p>`;
+
+        fetch(
+          "https://travel-advisor.p.rapidapi.com/attractions/list?location_id=297704&currency=USD&lang=en_US&lunit=km&limit=48",
+          opts
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            servicesData = data.data.filter(
+              (service) => service.name && service.photo
+            );
+            renderPage();
+          })
+          .catch((error) => {
+            console.error("Error fetching services:", error);
+            servicesSection.innerHTML = `<h1 class="main_service_heading">Our Services</h1><p class="error-message">Failed to load services. Please try again later.</p>`;
+          });
+      }
+      function renderPage() {
+        const servicesSection = document.querySelector(".section_second");
+        const paginationContainer = document.querySelector(".pagination");
+
+        servicesSection.innerHTML = `<h1 class="main_service_heading">Our Services</h1>`;
+
+        const startIndex = (cPage - 1) * recPerPage;
+        const endIndex = startIndex + recPerPage;
+
+        const currentServices = servicesData.slice(startIndex, endIndex);
+
+        const searchInput = document.querySelector("#searchBar");
+
+        searchInput.addEventListener("input", () => {
+          const searchTerm = searchInput.value.trim().toLowerCase();
+          if (searchTerm) {
+            filterServices(searchTerm);
+          } else {
+            document.querySelector(".main_service_heading").textContent =
+              "Our Services";
+            cPage = 1;
+            renderPage();
+          }
+        });
+
+        function filterServices(searchTerm) {
+          const filteredServices = servicesData.filter(
+            (service) =>
+              service.name.toLowerCase().includes(searchTerm) ||
+              (service.description &&
+                service.description.toLowerCase().includes(searchTerm))
+          );
+
+          renderFilteredServices(filteredServices, searchTerm);
+        }
+
+        function renderFilteredServices(filteredServices, searchTerm) {
+          const servicesSection = document.querySelector(".section_second");
+          servicesSection.innerHTML = `<h1 class="main_service_heading">Search Results</h1>`;
+
+          if (filteredServices.length === 0) {
+            servicesSection.innerHTML += `<p class="no-results">No services found matching "${searchTerm}".</p>`;
+            return;
+          }
+
+          filteredServices.forEach((service, index) => {
+            const description = service.description;
+            const isEven = index % 2 === 0;
+            const serviceHTML = `
+      <div class="${isEven ? "first_service" : "center_service"}">
+        ${
+          isEven
+            ? `<img src="${service.photo.images.medium.url}" alt="${service.name}" />`
+            : ""
+        }
+        <div class="${isEven ? "content1" : "center_content_service"}">
+          <h1>${service.name}</h1>
+          <p>${
+            description.length > 80
+              ? description.slice(0, 80) + "..."
+              : description || "No description available for this service."
+          }</p>
+          <button class="${
+            isEven ? "service_one_btn" : "center_service_btn"
+          }" onclick="window.open('${
+              service.web_url
+            }', '_blank')">Learn More</button>
+        </div>
+        ${
+          !isEven
+            ? `<img src="${service.photo.images.medium.url}" alt="${service.name}" />`
+            : ""
+        }
+      </div>`;
+            servicesSection.innerHTML += serviceHTML;
+          });
+        }
+
+        currentServices.forEach((service, index) => {
+          const isEven = index % 2 === 0;
+          const serviceHTML = `
+      <div class="${isEven ? "first_service" : "center_service"}">
+        ${
+          isEven
+            ? `<img src="${service.photo.images.medium.url}" alt="${service.name}" />`
+            : ""
+        }
+        <div class="${isEven ? "content1" : "center_content_service"}">
+          <h1>${service.name}</h1>
+          <p>${
+            service.description.length > 80
+              ? service.description.slice(0, 80) + "..."
+              : service.description ||
+                "No description available for this service."
+          }</p>
+          <button class="${
+            isEven ? "service_one_btn" : "center_service_btn"
+          }" onclick="window.open('${
+            service.web_url
+          }', '_blank')">Learn More</button>
+        </div>
+        ${
+          !isEven
+            ? `<img src="${service.photo.images.medium.url}" alt="${service.name}" />`
+            : ""
+        }
+      </div>`;
+          servicesSection.innerHTML += serviceHTML;
+        });
+
+        renderPagination();
+      }
+
+      function renderPagination() {
+        const paginationContainer = document.querySelector(".pagination");
+        paginationContainer.innerHTML = "";
+
+        const totalPages = Math.ceil(servicesData.length / recPerPage);
+
+        for (let i = 1; i <= totalPages; i++) {
+          const button = document.createElement("button");
+          button.textContent = i;
+          button.classList.add("page-btn");
+          if (i === cPage) button.classList.add("active");
+
+          button.onclick = () => {
+            cPage = i;
+            renderPage();
+          };
+
+          paginationContainer.appendChild(button);
+        }
+      }
+      fetchServices();
+    </script>
+  </body>
+</html>

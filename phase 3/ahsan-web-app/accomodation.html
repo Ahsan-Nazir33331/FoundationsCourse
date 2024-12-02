@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hotel Listings</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.marquee/jquery.marquee.min.js"></script>
+    <link rel="stylesheet" href="./accomodation.css" />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header_one">
+      <div class="email_contact">
+        <i class="fa-regular fa-envelope"></i>
+        <h3>ahsan.nazir0202@gmail.com</h3>
+      </div>
+      <div class="flag_contact">
+        <img src="./images/icon.png" alt="error loading" />
+        <h3>+372 55543624</h3>
+      </div>
+    </header>
+    <!-- Second head -->
+    <header class="header_second">
+      <h1>Family Adventure Park</h1>
+    </header>
+    <!-- navbar -->
+    <nav class="navbar">
+      <i class="fas fa-bars" id="hamburger"></i>
+      <div class="mobileMenu">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="zone.html">Zone</a>
+        <a href="tickets.html">Tickets</a>
+        <a href="accomodation.html">Accomodation</a>
+        <a href="contact.html">Contact us</a>
+        <a href="#" id="exitMenu">❌</a>
+      </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        |
+        <li><a href="about.html">About us</a></li>
+        |
+        <li><a href="zone.html">Zones</a></li>
+        |
+        <li><a href="tickets.html">Tickets</a></li>
+        |
+        <li><a href="accomodation.html">Accomodation</a></li>
+        |
+        <li><a href="contact.html">Contact us</a></li>
+      </ul>
+    </nav>
+    <!--  -->
+    <div class="hotel-listing">
+      <h1 id="countAccom"></h1>
+      <div class="loading" style="display: none">Loading...</div>
+      <!-- Loading indicator -->
+      <div class="hotels">
+        <!-- Hotel Cards will be dynamically inserted here -->
+      </div>
+      <div class="pagination"></div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-brand">
+          <img src="./images/logo.png" alt="Family Adventure Park Logo" />
+          <p>Your gateway to unforgettable family adventures!</p>
+        </div>
+        <div class="footer-subscribe">
+          <h4>Stay Updated</h4>
+          <form>
+            <input type="email" placeholder="Enter your email" required />
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        &copy; 2024 Family Adventure Park. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+
+    <script>
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.querySelector(".mobileMenu");
+
+      hamburger.addEventListener("click", function () {
+        mobileMenu.style.display = "flex";
+      });
+
+      const exitMenu = document.getElementById("exitMenu");
+      exitMenu.addEventListener("click", function () {
+        mobileMenu.style.display = "none";
+      });
+
+      const hotelsContainer = document.querySelector(".hotels");
+      const loadingIndicator = document.querySelector(".loading");
+      const paginationContainer = document.querySelector(".pagination");
+      const countAccom = document.getElementById("countAccom");
+
+      let currentPage = 1;
+      const itemsPerPage = 6;
+      let hotelsData = [];
+
+      loadingIndicator.style.display = "block";
+      hotelsContainer.innerHTML = "";
+      paginationContainer.innerHTML = "";
+
+      const options = {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Host": "travel-advisor.p.rapidapi.com",
+          "X-RapidAPI-Key":
+            "7d9e6fdc39msh0f8966da609d6adp1a76ffjsna366989208fc",
+        },
+      };
+
+      fetch(
+        "https://travel-advisor.p.rapidapi.com/attractions/list?location_id=297704&currency=USD&lang=en_US&lunit=km&limit=48",
+        options
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          hotelsData = data.data.filter((hotel) => hotel.name && hotel.photo);
+          renderHotelCards(hotelsData, currentPage);
+          renderPagination(hotelsData);
+          buttons;
+        })
+        .catch((error) => console.error("Error fetching data:", error))
+        .finally(() => {
+          loadingIndicator.style.display = "none";
+        });
+      const renderHotelCards = (hotelsData, page) => {
+        hotelsContainer.innerHTML = "";
+        const start = (page - 1) * itemsPerPage;
+        const end = page * itemsPerPage;
+        countAccom.innerHTML = `Tallinn: ${start + 1}-${end} of ${
+          hotelsData.length
+        }`;
+        const pageData = hotelsData.slice(start, end);
+
+        pageData.forEach((hotel) => {
+          const hotelCard = document.createElement("div");
+          hotelCard.classList.add("hotel-card");
+
+          const hotelImage = document.createElement("img");
+          hotelImage.src = hotel.photo
+            ? hotel.photo.images.medium.url
+            : "./images/default.jpg";
+          hotelImage.alt = hotel.name;
+
+          const details = document.createElement("div");
+          details.classList.add("details");
+
+          const hotelName = document.createElement("h3");
+          hotelName.textContent = hotel.name || "Unknown Name";
+
+          const hotelLocation = document.createElement("p");
+          hotelLocation.textContent = hotel.location_string || "No Location";
+          hotelLocation.style.color = "black";
+          const price = document.createElement("p");
+          price.classList.add("price");
+          const randomPrice =
+            Math.floor(Math.random() * (5000 - 250 + 1)) + 250;
+          price.textContent = `€${randomPrice.toLocaleString()}`;
+          const visitButton = document.createElement("button");
+          visitButton.textContent = "Visit Location";
+          visitButton.classList.add("visit-btn");
+          visitButton.style.backgroundColor = "#E0A435";
+          visitButton.style.color = "white";
+          visitButton.style.border = "none";
+          visitButton.style.padding = "10px 20px";
+          visitButton.style.borderRadius = "5px";
+          visitButton.style.fontSize = "16px";
+          visitButton.style.cursor = "pointer";
+          visitButton.style.transition = "background-color 0.3s";
+          visitButton.onmouseover = function () {
+            visitButton.style.backgroundColor = "#c78e26";
+          };
+
+          visitButton.onmouseout = function () {
+            visitButton.style.backgroundColor = "#E0A435";
+          };
+
+          visitButton.onclick = () => {
+            window.open(
+              `https://www.google.com/maps/search/?q=${encodeURIComponent(
+                hotel.location_string
+              )}`,
+              "_blank"
+            );
+          };
+          const taxesFees = document.createElement("p");
+          taxesFees.textContent = "Taxes and fees incl.";
+
+          details.appendChild(hotelName);
+          details.appendChild(hotelLocation);
+          details.appendChild(price);
+          details.appendChild(visitButton);
+          details.appendChild(taxesFees);
+
+          hotelCard.appendChild(hotelImage);
+          hotelCard.appendChild(details);
+
+          hotelsContainer.appendChild(hotelCard);
+        });
+      };
+
+      const renderPagination = (hotelsData) => {
+        const totalPages = Math.ceil(hotelsData.length / itemsPerPage);
+
+        paginationContainer.innerHTML = "";
+
+        for (let i = 1; i <= totalPages; i++) {
+          const pageButton = document.createElement("button");
+          pageButton.textContent = i;
+          pageButton.classList.add("page-btn");
+          pageButton.onclick = () => {
+            currentPage = i;
+            renderHotelCards(hotelsData, currentPage);
+            updateActiveButton();
+          };
+
+          paginationContainer.appendChild(pageButton);
+        }
+
+        updateActiveButton();
+      };
+      const updateActiveButton = () => {
+        const buttons = document.querySelectorAll(".page-btn");
+        buttons.forEach((button) => {
+          button.classList.remove("active");
+        });
+
+        const activeButton =
+          paginationContainer.querySelectorAll(".page-btn")[currentPage - 1];
+        if (activeButton) {
+          activeButton.classList.add("active");
+        }
+      };
+      const stylePaginationButtons = () => {
+        const buttons = document.querySelectorAll(".page-btn");
+        buttons.forEach((button) => {
+          button.style.backgroundColor = "#E0A435";
+          button.style.color = "white";
+          button.style.border = "none";
+          button.style.padding = "5px 10px";
+          button.style.margin = "0 5px";
+          button.style.borderRadius = "5px";
+          button.style.fontSize = "16px";
+          button.style.cursor = "pointer";
+          button.style.transition = "background-color 0.3s";
+          button.onmouseover = function () {
+            button.style.backgroundColor = "#c78e26";
+          };
+          button.onmouseout = function () {
+            button.style.backgroundColor = "#E0A435";
+          };
+        });
+      };
+    </script>
+  </body>
+</html>
